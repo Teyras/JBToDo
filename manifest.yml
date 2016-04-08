@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: eu-gb.mybluemix.net
+  name: JBToDo
+  host: JBToDo
+  disk_quota: 1024M
+  services:
+  - ClearDB MySQL Database-z0
+  buildpack: python_buildpack
