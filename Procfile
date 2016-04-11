@@ -1,1 +1,1 @@
-web: python3 welcome.py
+web: python3 run_app.py
