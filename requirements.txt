@@ -1,6 +1,8 @@
 Flask==0.10.1
 Flask-Migrate
 Flask-WTF
+Flask-Bootstrap
+Flask-Nav
 alembic
 SQLAlchemy
 mysqlclient

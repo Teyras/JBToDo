@@ -1,9 +1,6 @@
 {% extends "layout.html" %}
-{% block body %}
-	<form method="POST", action="{{ url_for('new') }}">
-		{{ form.hidden_tag() }}
-		{{ form.title.label }} {{ form.title() }}
-		{{ form.deadline.label }} {{ form.deadline() }}
-		<input type="submit" value="Save">
-	</form>
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+	{{ wtf.quick_form(form) }}
 {% endblock %}

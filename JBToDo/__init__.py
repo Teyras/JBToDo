@@ -17,6 +17,7 @@ from flask import Flask, jsonify
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 from .db import get_uri
 
 app = Flask(__name__)
@@ -32,6 +33,11 @@ manager.add_command('runserver', Server(host='0.0.0.0', port=int(port)))
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
+
+Bootstrap(app)
+
+from JBToDo.navigation import nav
+nav.init_app(app)
 
 import JBToDo.model
 import JBToDo.views
