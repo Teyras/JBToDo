@@ -1,3 +1,4 @@
+import datetime
 from flask import render_template, redirect, url_for, flash
 from JBToDo import app
 from JBToDo import db
@@ -5,8 +6,19 @@ from JBToDo.model import Task
 
 @app.route('/')
 def index():
-    items = Task.query.filter(Task.completed == False).all()
-    return render_template('show_items.html', items = items)
+    items = (Task.query
+        .filter(Task.completed == False)
+        .order_by(Task.deadline)
+        .all()
+    )
+
+    recent = (Task.query
+        .filter(Task.completed == True)
+        .order_by(Task.completion.desc())
+        [0:3]
+    )
+
+    return render_template('show_items.html', items = items, recent = recent)
 
 from JBToDo.forms import NewItemForm
 
@@ -17,7 +29,7 @@ def new():
         task = Task()
         task.title = form.title.data
         task.deadline = form.deadline.data
-        task.completed= False
+        task.completed = False
         db.session.add(task)
         db.session.commit()
         flash("Task {title} created".format(title = task.title))
@@ -28,6 +40,7 @@ def new():
 def complete(id):
     task = Task.query.filter(Task.id == id).one()
     task.completed = True
+    task.completion = datetime.datetime.utcnow()
     db.session.commit()
     flash("Task {title} completed".format(title = task.title))
     return redirect(url_for('index'))

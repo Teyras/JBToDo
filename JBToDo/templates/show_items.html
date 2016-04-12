@@ -1,12 +1,27 @@
 {% import "bootstrap/utils.html" as utils %}
 {% extends "layout.html" %}
 {% block main %}
+	<h1>Incomplete tasks</h1>
 	{% for item in items %}
 		<div>
 			<a href="{{ url_for('complete', id = item.id) }}">
 				{{ utils.icon('ok') }}
 			</a>
 			<span>{{ item.title }}</span>
+			<span>{{ item.deadline }}</span>
 		</div>
 	{% endfor %}
+	{% if items | length == 0 %}
+		<p>No tasks - good for you!<p>
+	{% endif %}
+
+	{% if recent | length > 0 %}
+		<h1>Recently completed tasks</h1>
+		{% for item in recent %}
+			<div>
+				<span>{{ item.title }}</span>
+				<span>{{ item.completion }}</span>
+			</div>
+		{% endfor %}
+	{% endif %}
 {% endblock %}
