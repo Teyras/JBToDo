@@ -2,5 +2,5 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block main %}
-	{{ wtf.quick_form(form) }}
+	{{ wtf.quick_form(form, form_type = "horizontal") }}
 {% endblock %}
