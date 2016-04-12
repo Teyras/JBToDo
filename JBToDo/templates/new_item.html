@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+	<form method="POST", action="{{ url_for('new') }}">
+		{{ form.hidden_tag() }}
+		{{ form.title.label }} {{ form.title() }}
+		{{ form.deadline.label }} {{ form.deadline() }}
+		<input type="submit" value="Save">
+	</form>
+{% endblock %}

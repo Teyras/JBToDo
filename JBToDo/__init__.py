@@ -22,6 +22,7 @@ from .db import get_uri
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = get_uri()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SECRET_KEY'] = '1234'
 
 manager = Manager(app)
 
