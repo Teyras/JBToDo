@@ -1,6 +1,12 @@
+{% import "bootstrap/utils.html" as utils %}
 {% extends "layout.html" %}
 {% block main %}
 	{% for item in items %}
-		<p>{{ item.title }}</p>
+		<div>
+			<a href="{{ url_for('complete', id = item.id) }}">
+				{{ utils.icon('ok') }}
+			</a>
+			<span>{{ item.title }}</span>
+		</div>
 	{% endfor %}
 {% endblock %}
